@@ -1,0 +1,165 @@
+
+
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  }
+  
+  /* The navigation menu links */ 
+  /*deleteeeee*/
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  
+  /*deleteeeee*/
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+  .sidenav button {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    background-color: #111;
+    border: none;
+    margin-left: 20px;
+    font-style: italic;
+
+  }
+  .sidenav button:hover {
+    color: #f1f1f1;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s;
+    padding: 20px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+ 
+  .center{
+      text-align: center;
+  }
+  
+
+  a.button1{
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid black;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:black;
+    text-align:center;
+    transition: all 0.2s;
+    margin-top: 20px;
+    }
+    a.button1:hover{
+        color:#000000;
+        background-color:#7499ff;
+        }
+
+        @media all and (max-width:30em){
+                a.button1{
+                display:block;
+                margin:0.4em auto;
+        }
+
+
+    } 
+
+    .form{
+        text-align: center;
+        
+        margin-top: 60px;
+    }
+    .submit{
+        margin-top: 40px;
+    }
+    .select{
+        margin-top: 8px;
+
+    }
+    p{
+        margin-top: 50px;
+    }
+    .buttonPara{
+        display: inline-block;
+        background: #000;
+        border-radius: 4px;
+        font-family: "arial-black";
+        font-size: 14px;
+        color: #FFF;
+        padding: 8px 12px;
+        cursor: pointer;   
+      }
+      ul {
+        list-style-type: none;
+    }
+    .textArea{
+        margin: 37px;
+    }
+    
+
+
+
+h4{
+    text-align: center;
+    margin-block-start: inherit;
+    padding-top: 15px;  
+    font-style: italic; 
+    margin: 30px;
+}
+
+.beg{
+    float:left
+}
+
+.formEl{
+    width: 50%;
+}
+.formBtn{
+    margin-bottom: 40px;
+}
+.formCol{
+    text-align: -webkit-center;
+}
+.txtAreaForm{
+    margin-top: 80px;
+}
