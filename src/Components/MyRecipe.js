@@ -4,13 +4,12 @@ import deleteIcon from '../Components/Pictures/deleteIcon.png'
 
 var key = 0;
 const MyRecepie = (props) => {
-   const  alertit = () => {
-        alert("yes")
-    }
+
 
     return (
         <div className={style.recipe}>
-            <div className={style.position}><img onClick={alertit} src={deleteIcon}  alt="" /></div>
+            <h4>{props.name}</h4>
+            <div className={style.position}><img onClick={props.mod} src={deleteIcon} alt="" /></div>
             <p className={style.bold}>ingredients:</p>
             <ol>
                 {props.ingredients.map(ingredient => (
@@ -18,8 +17,8 @@ const MyRecepie = (props) => {
                 ))}
             </ol>
             <img className={style.image} src={props.img} alt="" />
-            <p>{props.instructions}</p>
 
+            <button className={style.button1} onClick={props.showInstructions}>Show full instructions</button>
 
         </div>
     )

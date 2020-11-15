@@ -8,14 +8,14 @@ function HomePage() {
         height: "800px",
         backgroundImage: "url(" + Background + ")"
     };
-    
+
     return (
         <div>
             <section style={sectionStyle}>
                 
-            </section>
-           
-            
+                </section>
+
+
 
         </div>
     )
