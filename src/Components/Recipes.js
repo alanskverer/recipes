@@ -32,23 +32,10 @@ function Recipes() {
             (`https://api.edamam.com/search?q=${query}&app_id=${app_id}&app_key=${app_key}`
             );
         const apiData = await response.json()
-        //console.log(apiData);
         hasResults = (apiData.count > 0) ? true : false;
-
-        //console.log(apiData.hits);
-
         setData(apiData.hits);
 
         defineHeader();
-
-
-
-
-
-
-
-        // console.log(apiData.hits);
-
 
     }
     const getSearch = e => {

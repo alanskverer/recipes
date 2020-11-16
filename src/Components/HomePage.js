@@ -29,20 +29,11 @@ function HomePage(props) {
   const [registered, setregistered] = useState(false);
   useEffect(() => {
 
-
-
-
     $("#userNameTaken").hide()
     axios.get('https://alanrecipes1313.firebaseio.com/users.json')
       .then(response => {
-        // console.log(response.data)
+
         let usersArr = response.data;
-
-
-
-
-
-
         let objKeys = Object.keys(response.data);
         let dataArr = [];
         objKeys.forEach(key => {
@@ -53,47 +44,11 @@ function HomePage(props) {
             userName: value.userName,
             password: value.password
           }
-          // let usersArr = [...usersList];
-          // arrKeyAndName.push(currentKeyAndName);
-          // this.setState({ recipesKeyAndName: arrKeyAndName })
-
-
         });
         setUsersList(dataArr);
 
 
-
-
-
-
-
-
-
-
-
-
       })
-    // axios.post('/users.json');
-    // let user = {
-    //   userName: "alan",
-    //   password: "123456"
-    // }
-
-    // axios.post('/users.json', user)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   }, [login, registered]);
 
@@ -111,7 +66,7 @@ function HomePage(props) {
     const foundUserName = usersList.find(user => user.userName === userName);
 
     if (foundUserName !== undefined) {
-      // console.log(foundUserName)
+
       if (foundUserName.password === userPassword) {
         setLogin(true);
         setLoginModal(true);
@@ -126,11 +81,11 @@ function HomePage(props) {
 
       }
       else {
-        setCantConnect(true)// what happen when user dosent match to db?
+        setCantConnect(true)
       }
 
     } else {
-      setCantConnect(true)// what happen when user dosent match to db?
+      setCantConnect(true)
 
     }
   }
@@ -144,13 +99,6 @@ function HomePage(props) {
     window.location.reload();
   }
   const registerHandler = () => {
-
-
-
-
-
-
-
 
     const foundUserName = usersList.find(user => user.userName === userName);
 
@@ -172,10 +120,6 @@ function HomePage(props) {
       localStorage.setItem('userName',
         JSON.stringify(userName));
     }
-
-
-
-
 
 
 
@@ -228,17 +172,14 @@ function HomePage(props) {
 
       let user_name = JSON.parse(localStorage.getItem('userName'))
       loginPage = <div className="logoutForm"><h1 style={{ color: "white" }}>{`Hello ${user_name}`} </h1>
-        <Button style={{marginTop:"20px"}} onClick={logoutHandler}>Logout</Button>
+        <Button style={{ marginTop: "20px" }} onClick={logoutHandler}>Logout</Button>
 
 
       </div>
     }
 
 
-
-
   }
-
 
 
 
@@ -272,8 +213,6 @@ function HomePage(props) {
         {loginPage}
       </Row>
     </Container>
-
-
 
 
   )

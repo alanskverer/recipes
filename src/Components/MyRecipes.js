@@ -12,8 +12,6 @@ import Modal from '../Components/UI/Modal/Modal';
 
 class MyRecipes extends Component {
 
-
-
   state = {
     userName: "",
     ingredients: Object.keys(ingredients),
@@ -28,7 +26,6 @@ class MyRecipes extends Component {
     showInstructions: false
 
   };
-
 
 
   componentDidMount() {
@@ -50,12 +47,8 @@ class MyRecipes extends Component {
     this.getAllRecipesFromServer();
 
 
-
-
   }
-  componentDidUpdate() {
 
-  }
 
 
   userNameChangeHandler = () => {
@@ -66,7 +59,6 @@ class MyRecipes extends Component {
 
   }
 
-  /* Set the width of the side navigation to 0 */
   closeNav() {
     document.getElementById("mySidenav").style.width = "0";
   }
@@ -197,21 +189,12 @@ class MyRecipes extends Component {
 
 
         }
-
-
-
-
         )
-
 
     }
     else {
       $("#emptyIngArr").show();
     }
-
-
-
-
 
   }
   getAllRecipesFromServer = () => {
@@ -244,15 +227,9 @@ class MyRecipes extends Component {
 
             }
 
-
-
-
           });
           this.setState({ dataRecipes: dataArr });
         }
-
-
-
 
       });
 
@@ -261,10 +238,6 @@ class MyRecipes extends Component {
     $("#ingredientList").hide();
     $("#recipeAddedSuccesfully").hide();
     $("#emptyIngArr").hide();
-
-
-
-
 
 
   }
@@ -335,7 +308,6 @@ class MyRecipes extends Component {
           <a href="http://localhost:3000/myrecipes" className={style.closebtn} onClick={() => this.closeNav()}>&times;</a>
           <a href="http://localhost:3000/myrecipes">My Recipes</a>
           <button onClick={this.addRecipeMenu}>Add Recipe</button>
-          <a href="http://localhost:3000/myrecipes">Add Ingredient</a>
 
         </div>
         <div id="recipeAddedSuccesfully"><h1>Recipe Added!</h1></div>
@@ -344,7 +316,7 @@ class MyRecipes extends Component {
         </div>
         <div className={style.center}>
           <button id="menubtn" onClick={() => this.openNav()} className={style.button1}>Menu</button>
-          <h3 style={{color:"white"}} id="pleaseLogin">Please Login To See Your Recipes</h3>
+          <h3 style={{ color: "white" }} id="pleaseLogin">Please Login To See Your Recipes</h3>
         </div>
         <div id="myRecipes" className="recipes" >
           {this.state.dataRecipes.map(recipe => (
@@ -398,7 +370,7 @@ class MyRecipes extends Component {
                 <Row>
                   <Col>
                     <Button onClick={this.addIngredientHandler} className={style.formBtn} >Add ingredient</Button>
-                    <p id="emptyIngArr" style={{ color: "red", fontSize : "20px" }}>Please add at least one ingredient!</p>
+                    <p id="emptyIngArr" style={{ color: "gold", fontSize: "20px", fontWeight: "bold" }}>*Please add at least one ingredient</p>
 
                   </Col>
                 </Row>
@@ -424,9 +396,6 @@ class MyRecipes extends Component {
         </Container>
 
       </div>
-
-
-
 
     )
   }
