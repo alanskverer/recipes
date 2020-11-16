@@ -55,12 +55,13 @@
   }
   nav{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     min-height: 10vh;
-    color:white;
-    background-color:rgb(76,60,60) ;
-    
+    color: white; 
+    background-color: rgb(76,60,60);
+    min-width: 100%;
+    float: right;
   }
   .nav-links{
     width: 40%;
@@ -69,6 +70,15 @@
     align-items: center;
     list-style: none;
   }
+  .login-bar{
+    max-width: 400px;
+    width: 100%;
+  }
+  .loginModal{
+    margin-top: 0px;
+  }
+  
+  
 
 
 

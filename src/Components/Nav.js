@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import logo from './Pictures/logo.png'
+import { Container, Row, Col } from 'react-bootstrap';
 
 function Nav() {
     const navStyle = {
@@ -10,6 +11,7 @@ function Nav() {
         height: "70px"
     }
     return (
+
         <nav >
             <img style={logoStyle} src={logo} alt="My logo" />
             <ul className="nav-links">
@@ -24,6 +26,9 @@ function Nav() {
                 </Link>
             </ul>
         </nav>
+
+
+
     )
 }
 export default Nav;
