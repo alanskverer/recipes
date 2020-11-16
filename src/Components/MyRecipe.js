@@ -8,7 +8,7 @@ const MyRecepie = (props) => {
 
     return (
         <div className={style.recipe}>
-            <h4>{props.name}</h4>
+            <h4 className={style.recipeHeader}>{props.name}</h4>
             <div className={style.position}><img onClick={props.mod} src={deleteIcon} alt="" /></div>
             <p className={style.bold}>ingredients:</p>
             <ol>

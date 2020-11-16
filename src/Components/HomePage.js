@@ -8,7 +8,7 @@ import Modal from '../Components/UI/Modal/Modal';
 import $ from 'jquery';
 
 
-function HomePage() {
+function HomePage(props) {
   var sectionStyle = {
     width: "100%",
     height: "800px",
@@ -19,7 +19,6 @@ function HomePage() {
     minWidth: "100%",
     minHeight: "100%",
   };
-
 
   const [usersList, setUsersList] = useState([]);
   const [userName, setUserName] = useState("");
@@ -101,7 +100,8 @@ function HomePage() {
 
 
   const userNameHandler = (event) => {
-    setUserName(event.target.value)
+    setUserName(event.target.value);
+    $("#userNameTaken").hide()
   }
   const passwordHandler = (event) => {
     setUserPassword(event.target.value)
@@ -116,6 +116,14 @@ function HomePage() {
         setLogin(true);
         setLoginModal(true);
 
+
+        localStorage.setItem('userName',
+          JSON.stringify(userName));
+
+
+
+
+
       }
       else {
         setCantConnect(true)// what happen when user dosent match to db?
@@ -129,6 +137,11 @@ function HomePage() {
   const closeModalHandler = () => {
     setLoginModal(false);
     setCantConnect(false);
+  }
+  const logoutHandler = () => {
+
+    localStorage.clear();
+    window.location.reload();
   }
   const registerHandler = () => {
 
@@ -156,6 +169,8 @@ function HomePage() {
 
 
         })
+      localStorage.setItem('userName',
+        JSON.stringify(userName));
     }
 
 
@@ -165,42 +180,64 @@ function HomePage() {
 
 
   }
+  let loginPage = "";
 
-  let loginPage = <Col sm="12">
-    <section style={sectionStyle}>
-      <Form style={{
-        marginLeft: "13%", width: "50%", marginTop: "30px"
-      }}>
+  if (localStorage && localStorage.getItem('userName') === null) {
+
+    let user_name = JSON.parse(localStorage.getItem('userName'))
+    console.log(user_name)
+
+    loginPage = <Col sm="12">
+      <section style={sectionStyle}>
+        <Form style={{
+          marginLeft: "13%", width: "50%", marginTop: "30px"
+        }}>
 
 
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label style={{ color: "white" }}>User Name:</Form.Label>
-          <Form.Control onChange={userNameHandler} className="login-bar" type="text" placeholder="Enter User Name" />
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label style={{ color: "white" }}>User Name:</Form.Label>
+            <Form.Control onChange={userNameHandler} className="login-bar" type="text" placeholder="Enter User Name" />
 
-        </Form.Group>
+          </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label style={{ color: "white" }}>Password</Form.Label>
-          <Form.Control onChange={passwordHandler} className="login-bar" type="password" placeholder="Password" />
-        </Form.Group>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label style={{ color: "white" }}>Password</Form.Label>
+            <Form.Control onChange={passwordHandler} className="login-bar" type="password" placeholder="Password" />
+          </Form.Group>
 
-        <Button onClick={loginHandler} variant="primary" >
-          Login
+          <Button onClick={loginHandler} variant="primary" >
+            Login
         </Button>
-        <Button onClick={registerHandler} style={{ marginLeft: "25px" }} variant="primary" >
-          Register
+          <Button onClick={registerHandler} style={{ marginLeft: "25px" }} variant="primary" >
+            Register
         </Button>
-        <h5 id="userNameTaken" style={{
-          color: "red",
-          margin: "auto 0"
-        }}>{userName} is taken!, try different user name</h5>
-      </Form>
+          <h5 id="userNameTaken" style={{
+            color: "red",
+            margin: "auto 0"
+          }}>{userName} is taken! try different user name</h5>
+        </Form>
 
-    </section>
+      </section>
 
-  </Col>
+    </Col>
 
 
+  }
+  else {
+    if (localStorage && localStorage.getItem('userName') !== null) {
+
+      let user_name = JSON.parse(localStorage.getItem('userName'))
+      loginPage = <div className="logoutForm"><h1 style={{ color: "white" }}>{`Hello ${user_name}`} </h1>
+        <Button style={{marginTop:"20px"}} onClick={logoutHandler}>Logout</Button>
+
+
+      </div>
+    }
+
+
+
+
+  }
 
 
 
@@ -214,7 +251,7 @@ function HomePage() {
             <p style={{ marginTop: "0px", textAlign: "center" }}>{`Hey ${userName}, Welcome!`}</p>
             <p style={{ marginTop: "0px", textAlign: "center" }}>Where Do You Want To Go?</p>
             <div className="col-md-12 text-center">
-              <Button href="http://localhost:3000/myrecipes" variant="link">My Recipes</Button>
+              <Button href={`http://localhost:3000/myrecipes/${userName}`} variant="link">My Recipes</Button>
               <Button href="http://localhost:3000/onlinerecipes" variant="link">Online Recipes</Button><br />
               <Button onClick={closeModalHandler} variant="secondary" style={{ marginTop: '25px' }}>Close</Button>
             </div>

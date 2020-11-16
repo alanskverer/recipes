@@ -5,7 +5,7 @@ import MyRecepie from './MyRecipe';
 import $ from 'jquery';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import BackGroundAddRecipe from './BackGroundAddRecipe';
+//import BackGroundAddRecipe from './BackGroundAddRecipe';
 import axios from './axsios-orders';
 import Modal from '../Components/UI/Modal/Modal';
 
@@ -15,7 +15,7 @@ class MyRecipes extends Component {
 
 
   state = {
-    userName: "Alan",
+    userName: "",
     ingredients: Object.keys(ingredients),
     newIngredient: "",
     newIngredients: [],
@@ -32,6 +32,21 @@ class MyRecipes extends Component {
 
 
   componentDidMount() {
+    $("#pleaseLogin").hide();
+    let userName = '';
+    if (localStorage && localStorage.getItem('userName')) {
+      userName = JSON.parse(localStorage.getItem('userName'));
+    }
+    console.log(userName)
+    if (userName === '') {
+      $("#menubtn").hide();
+      $("#pleaseLogin").show();
+
+
+    }
+    this.setState({ userName: userName })
+
+
     this.getAllRecipesFromServer();
 
 
@@ -129,7 +144,8 @@ class MyRecipes extends Component {
         ingredients: recipeIngredients,
         image: imageUrl,
         instructions: recipeInstructions,
-        id: recipeName
+        id: recipeName,
+        userName: this.state.userName
 
       }
 
@@ -145,16 +161,25 @@ class MyRecipes extends Component {
                 let objKeys = Object.keys(response.data);
                 let dataArr = [];
                 objKeys.forEach(key => {
-                  let value = response.data[key];
-                  dataArr.push(value);
 
-                  let currentKeyAndName = {
-                    key: key,
-                    id: value.id
+                  let value = response.data[key];
+                  if (value["userName"] === this.state.userName) {
+
+
+                    dataArr.push(value);
+
+
+                    let currentKeyAndName = {
+                      key: key,
+                      id: value.id
+                    }
+                    let arrKeyAndName = [...this.state.recipesKeyAndName];
+                    arrKeyAndName.push(currentKeyAndName);
+                    this.setState({ recipesKeyAndName: arrKeyAndName })
+
                   }
-                  let arrKeyAndName = [...this.state.recipesKeyAndName];
-                  arrKeyAndName.push(currentKeyAndName);
-                  this.setState({ recipesKeyAndName: arrKeyAndName })
+
+
 
 
                 });
@@ -205,14 +230,20 @@ class MyRecipes extends Component {
           objKeys.forEach(key => {
 
             let value = response.data[key];
-            dataArr.push(value);
-            let currentKeyAndName = {
-              key: key,
-              id: value.id
+            if (value["userName"] === this.state.userName) {
+
+              dataArr.push(value);
+              let currentKeyAndName = {
+                key: key,
+                id: value.id
+              }
+              let arrKeyAndName = [...this.state.recipesKeyAndName];
+              arrKeyAndName.push(currentKeyAndName);
+              this.setState({ recipesKeyAndName: arrKeyAndName })
+
+
             }
-            let arrKeyAndName = [...this.state.recipesKeyAndName];
-            arrKeyAndName.push(currentKeyAndName);
-            this.setState({ recipesKeyAndName: arrKeyAndName })
+
 
 
 
@@ -280,7 +311,8 @@ class MyRecipes extends Component {
 
   render() {
     return (
-      <div>
+
+      <div className={style.myRecipesMainDiv}>
         <Modal show={this.state.erasing}>
           <p style={{ textAlign: 'center' }}>Are you sure you want to delete this recipe?</p>
           <Button variant="danger" style={{ margin: '5px' }} onClick={this.deleteRecipeHandler} >Delete</Button>
@@ -289,11 +321,11 @@ class MyRecipes extends Component {
         </Modal>
         <Modal show={this.state.showInstructions} >
           <div className={style.modalInstructions}>
-          
-          <h5>Recipe instructions</h5>
-          <p>{this.state.currentInstructions}</p>
+
+            <h5>Recipe instructions</h5>
+            <p>{this.state.currentInstructions}</p>
           </div>
-          
+
           <Button variant="secondary" style={{ marginTop: '25px' }} onClick={this.closeInstructionsModal}>Close</Button>
 
         </Modal>
@@ -308,10 +340,11 @@ class MyRecipes extends Component {
         </div>
         <div id="recipeAddedSuccesfully"><h1>Recipe Added!</h1></div>
 
-        <div id="header" className={style.center}><h1>My Recipes </h1>
+        <div id="header" className={style.myRecipesHeader}><h1>My Recipes </h1>
         </div>
         <div className={style.center}>
-          <button onClick={() => this.openNav()} className={style.button1}>Menu</button>
+          <button id="menubtn" onClick={() => this.openNav()} className={style.button1}>Menu</button>
+          <h3 style={{color:"white"}} id="pleaseLogin">Please Login To See Your Recipes</h3>
         </div>
         <div id="myRecipes" className="recipes" >
           {this.state.dataRecipes.map(recipe => (
@@ -334,25 +367,25 @@ class MyRecipes extends Component {
 
           <Form>
             <Row>
-              <Col sm="6" className={style.formCol}>
+              <Col sm="12" className={style.formCol}>
                 <h4>{this.state.userName}, Please Add Recipe</h4>
                 <Form.Group >
                   <Form.Label >
-                    Please enter recipe name
+                    Recipe Name
                                         </Form.Label>
                   <Form.Control type="text" id="recipeName" placeholder="recipe name" className={style.formEl} />
 
                 </Form.Group>
                 <Form.Group >
                   <Form.Label >
-                    Please enter recipe image url
+                    Recipe Image URL
                                         </Form.Label>
                   <Form.Control type="text" id="recipeImage" placeholder="recipe image url" className={style.formEl} />
 
                 </Form.Group>
                 <Form.Group>
                   <Form.Label>
-                    Please choose ingreients
+                    Choose Ingreients
                                       </Form.Label>
                   <Form.Control as="select" onChange={this.selectChangeHandler} id="selectOptions" className={style.formEl}  >
                     <option value="Select">Select</option>
@@ -365,7 +398,7 @@ class MyRecipes extends Component {
                 <Row>
                   <Col>
                     <Button onClick={this.addIngredientHandler} className={style.formBtn} >Add ingredient</Button>
-                    <p id="emptyIngArr" style={{ color: "red" }}>Please add at least one ingredient!</p>
+                    <p id="emptyIngArr" style={{ color: "red", fontSize : "20px" }}>Please add at least one ingredient!</p>
 
                   </Col>
                 </Row>
@@ -385,15 +418,14 @@ class MyRecipes extends Component {
                 <Button variant="secondary" onClick={this.createRecipe}  >Create Recipe</Button>
 
               </Col>
-              <Col sm="6">
-                <BackGroundAddRecipe />
 
-              </Col>
             </Row>
           </Form>
         </Container>
 
       </div>
+
+
 
 
     )

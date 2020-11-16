@@ -1,9 +1,38 @@
 
+body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  max-width: 100%;
+  background-image: url(https://cdn.pixabay.com/photo/2017/02/15/10/39/food-2068217_1280.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 
-.App {
+.onlineRecipes {
  
   font-family: 'Rubik', sans-serif;
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  /* background-image: url("https://cdn.pixabay.com/photo/2017/02/15/10/39/food-2068217_1280.jpg"); */
+ 
+  background-size: 500px;
+  height: 100%; 
+background-size: cover;
+  /* Full height
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  /* background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */ 
+}
+
+h1.onlineSerchBox{
+  color: white;
+}
+h2.onlineSerchBox{
+  color: white;
 }
   
   .search-form{
@@ -61,7 +90,7 @@
     color: white; 
     background-color: rgb(76,60,60);
     min-width: 100%;
-    float: right;
+   ;
   }
   .nav-links{
     width: 40%;
@@ -77,6 +106,13 @@
   .loginModal{
     margin-top: 0px;
   }
+  .logoutForm{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+  
   
   
 

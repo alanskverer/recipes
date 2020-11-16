@@ -5,12 +5,14 @@ import './App.css';
 import Recipes from './Components/Recipes';
 import MyRecipes from './Components/MyRecipes';
 import HomePage from './Components/HomePage';
+import BootNav from './Components/BootNav';
 function App() {
+  let userName = "alan"
   return (
     <Router>
       <div className="App">
 
-        <Nav />
+        <BootNav />
 
         <Switch>
           <Route exact path="/" component={HomePage} />

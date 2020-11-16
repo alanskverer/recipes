@@ -41,7 +41,7 @@ function Recipes() {
 
         defineHeader();
 
-       
+
 
 
 
@@ -85,8 +85,8 @@ function Recipes() {
 
 
     return (
-        <div className="App">
-            <h1>Search For Online Recipe</h1>
+        <div className="onlineRecipes">
+            <h1 className="onlineSerchBox">Search For Online Recipe</h1>
             <form onSubmit={getSearch} className="search-form">
                 <input className="search-bar" type="text" value={search} onChange={searchNameHandler} placeholder="Search for recipe" />
                 <button className="search-button" type="submit">
@@ -94,7 +94,7 @@ function Recipes() {
         </button>
 
             </form>
-            <h2>{header}</h2>
+            <h2 className="onlineSerchBox">{header}</h2>
             <br />
             <div className="recipes">
                 {data.map(recipe => (
