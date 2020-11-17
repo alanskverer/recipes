@@ -8,6 +8,7 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 //import BackGroundAddRecipe from './BackGroundAddRecipe';
 import axios from './axsios-orders';
 import Modal from '../Components/UI/Modal/Modal';
+import plusSign from '../Components/Pictures/add.png';
 
 
 class MyRecipes extends Component {
@@ -23,13 +24,16 @@ class MyRecipes extends Component {
     erasing: false,
     deleteRecipeName: null,
     currentInstructions: '',
-    showInstructions: false
+    showInstructions: false,
+    menu: false,
+    menuFloat: false
 
   };
 
 
   componentDidMount() {
     $("#pleaseLogin").hide();
+
     let userName = '';
     if (localStorage && localStorage.getItem('userName')) {
       userName = JSON.parse(localStorage.getItem('userName'));
@@ -61,13 +65,30 @@ class MyRecipes extends Component {
 
   closeNav() {
     document.getElementById("mySidenav").style.width = "0";
+
+  }
+  toggleNav() {
+    if (this.state.menu) {
+      document.getElementById("mySidenav").style.width = "0";
+      this.setState({
+        menu: false
+      })
+
+    }
+    else {
+      document.getElementById("mySidenav").style.width = "250px";
+      this.setState({
+        menu: true
+      })
+    }
   }
   addRecipeMenu = () => {
+    this.setState({ menuFloat: true })
     $("#myRecipes").hide();
     $("#header").hide();
     $("#addRecipeForm").show();
 
-    this.closeNav();
+    this.toggleNav();
   }
 
 
@@ -82,6 +103,7 @@ class MyRecipes extends Component {
 
 
   addIngredientHandler = (event) => {
+    $("#emptyIngArr").hide();
     let newIngArr = [...this.state.newIngredients];
     if (this.state.newIngredient === "" || this.state.newIngredient === "Select") {
 
@@ -305,7 +327,7 @@ class MyRecipes extends Component {
 
 
         <div id="mySidenav" className={style.sidenav} >
-          <a href="http://localhost:3000/myrecipes" className={style.closebtn} onClick={() => this.closeNav()}>&times;</a>
+          <a href="http://localhost:3000/myrecipes" className={style.closebtn} onClick={() => this.toggleNav()}>&times;</a>
           <a href="http://localhost:3000/myrecipes">My Recipes</a>
           <button onClick={this.addRecipeMenu}>Add Recipe</button>
 
@@ -315,7 +337,8 @@ class MyRecipes extends Component {
         <div id="header" className={style.myRecipesHeader}><h1>My Recipes </h1>
         </div>
         <div className={style.center}>
-          <button id="menubtn" onClick={() => this.openNav()} className={style.button1}>Menu</button>
+          <Button id="menubtn" style={this.state.menuFloat ? { float: "left" } : { float: "none" }} onClick={() => this.toggleNav()} variant="primary">Menu</Button>
+
           <h3 style={{ color: "white" }} id="pleaseLogin">Please Login To See Your Recipes</h3>
         </div>
         <div id="myRecipes" className="recipes" >
@@ -338,43 +361,70 @@ class MyRecipes extends Component {
         <Container fluid id="addRecipeForm">
 
           <Form>
+
             <Row>
-              <Col sm="12" className={style.formCol}>
+              <Col sm="4"></Col>
+              <Col sm="4" className={style.formCol}>
                 <h4>{this.state.userName}, Please Add Recipe</h4>
                 <Form.Group >
-                  <Form.Label >
-                    Recipe Name
-                                        </Form.Label>
-                  <Form.Control type="text" id="recipeName" placeholder="recipe name" className={style.formEl} />
+                  <Row>
+                    <Col sm="6"><Form.Label >
+                      Recipe Name
+                    </Form.Label></Col>
+                    <Col sm="6">
+                      <Form.Control type="text" id="recipeName" placeholder="recipe name" />
+
+                    </Col>
+                    <Col sm="4"></Col>
+                  </Row>
+
 
                 </Form.Group>
                 <Form.Group >
-                  <Form.Label >
-                    Recipe Image URL
-                                        </Form.Label>
-                  <Form.Control type="text" id="recipeImage" placeholder="recipe image url" className={style.formEl} />
+                  <Row>
+                    <Col sm="6"><Form.Label >
+                      Recipe Image Link
+                    </Form.Label></Col>
+                    <Col sm="6">
+                      <Form.Control type="text" id="recipeImage" placeholder="recipe image url" />
+
+                    </Col>
+                    <Col sm="4"></Col>
+                  </Row>
+
 
                 </Form.Group>
-                <Form.Group>
-                  <Form.Label>
-                    Choose Ingreients
-                                      </Form.Label>
-                  <Form.Control as="select" onChange={this.selectChangeHandler} id="selectOptions" className={style.formEl}  >
-                    <option value="Select">Select</option>
-                    {this.state.ingredients.map(ingredient => (
-                      <option key={ingredient} id="chosenIngredient" value={ingredient}>{ingredient}</option>
-                    ))}
-                  </Form.Control>
+                <Form.Group >
+                  <Row>
+                    <Col sm="6"><Form.Label >
+                      Choose Ingredients
+                    </Form.Label>
+                    </Col>
+                    <Col sm="6">
+                      <Form.Control as="select" onChange={this.selectChangeHandler} id="selectOptions"  >
+                        <option value="Select">Select</option>
+                        {this.state.ingredients.map(ingredient => (
+                          <option key={ingredient} id="chosenIngredient" value={ingredient}>{ingredient}</option>
+                        ))}
+                      </Form.Control>
+
+                    </Col>
+                    <Col sm="4"></Col>
+                  </Row>
+
                 </Form.Group>
+
+
 
                 <Row>
                   <Col>
-                    <Button onClick={this.addIngredientHandler} className={style.formBtn} >Add ingredient</Button>
+                    
+                      <img className={style.plusBtn} onClick={this.addIngredientHandler} src={plusSign} style={{ width: "50px", height: "50px" }} />
                     <p id="emptyIngArr" style={{ color: "gold", fontSize: "20px", fontWeight: "bold" }}>*Please add at least one ingredient</p>
 
                   </Col>
                 </Row>
-                <Row id="ingredientList" className={style.formEl}>
+                <Row id="ingredientList" >
                   <Col>
                     <p></p>
                   </Col>
@@ -382,12 +432,12 @@ class MyRecipes extends Component {
                 <Row>
                   <Col>
                     <Form.Group>
-                      <Form.Label className={style.txtAreaForm}>Recipe Instructions</Form.Label>
-                      <Form.Control id="textArea" as="textarea" rows={3} className={style.formEl} />
+                      <Form.Label style={{ marginTop: "40px" }} >Recipe Instructions</Form.Label>
+                      <Form.Control id="textArea" as="textarea" rows={3} />
                     </Form.Group>
                   </Col>
                 </Row>
-                <Button variant="secondary" onClick={this.createRecipe}  >Create Recipe</Button>
+                <Button variant="outline-dark" onClick={this.createRecipe} style={{ color: "white", backgroundColor: "forestgreen" }}>Create Recipe</Button>
 
               </Col>
 

@@ -176,7 +176,9 @@ h4{
 }
 .formCol{
     text-align: -webkit-center;
-    color:white
+    color:white;
+     border: solid 2px blanchedalmond;
+     margin-top:40px;
 }
 .txtAreaForm{
     margin-top: 80px;
@@ -217,3 +219,15 @@ h4{
     min-width: 100%;
     min-height: 100%;
   };
+ 
+  
+
+  
+
+  .plusBtn:hover {background-color: red}
+
+.plusBtn:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
