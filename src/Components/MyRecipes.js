@@ -26,7 +26,6 @@ class MyRecipes extends Component {
     currentInstructions: '',
     showInstructions: false,
     menu: false,
-    menuFloat: false
 
   };
 
@@ -83,7 +82,6 @@ class MyRecipes extends Component {
     }
   }
   addRecipeMenu = () => {
-    this.setState({ menuFloat: true })
     $("#myRecipes").hide();
     $("#header").hide();
     $("#addRecipeForm").show();
@@ -95,7 +93,6 @@ class MyRecipes extends Component {
     $("#header").show();
     $("#addRecipeForm").hide();
     this.toggleNav();
-    this.setState({ menuFloat: false })
   }
 
 
@@ -344,7 +341,7 @@ class MyRecipes extends Component {
         <div id="header" className={style.myRecipesHeader}><h1>My Recipes </h1>
         </div>
         <div className={style.center}>
-          <Button id="menubtn" style={this.state.menuFloat ? { float: "left" } : { float: "none" }} onClick={() => this.toggleNav()} variant="primary">Menu</Button>
+          <Button id="menubtn" style={{ marginTop: "20px" }} onClick={() => this.toggleNav()} variant="primary">Menu</Button>
 
           <h3 style={{ color: "white" }} id="pleaseLogin">Please Login To See Your Recipes</h3>
         </div>
@@ -369,10 +366,10 @@ class MyRecipes extends Component {
 
           <Form>
 
-            <Row>
+            <Row style={{ padding: "6px" }}>
               <Col sm="4"></Col>
               <Col sm="4" className={style.formCol}>
-                <h4>{this.state.userName}, Please Add Recipe</h4>
+                <h4 style={{paddingTop : "0px"}}>{this.state.userName}, Please Add Recipe</h4>
                 <Form.Group >
                   <Row>
                     <Col sm="6"><Form.Label >
@@ -397,6 +394,7 @@ class MyRecipes extends Component {
 
                     </Col>
                     <Col sm="4"></Col>
+
                   </Row>
 
 
