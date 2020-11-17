@@ -90,6 +90,13 @@ class MyRecipes extends Component {
 
     this.toggleNav();
   }
+  showRecipeMain = () => {
+    $("#myRecipes").show();
+    $("#header").show();
+    $("#addRecipeForm").hide();
+    this.toggleNav();
+    this.setState({ menuFloat: false })
+  }
 
 
   eraseHandler = (recipeName) => {
@@ -327,8 +334,8 @@ class MyRecipes extends Component {
 
 
         <div id="mySidenav" className={style.sidenav} >
-          <a href="http://localhost:3000/myrecipes" className={style.closebtn} onClick={() => this.toggleNav()}>&times;</a>
-          <a href="http://localhost:3000/myrecipes">My Recipes</a>
+          <button className={style.closebtn} onClick={() => this.toggleNav()}>&times;</button>
+          <button onClick={this.showRecipeMain}>My Recipes</button>
           <button onClick={this.addRecipeMenu}>Add Recipe</button>
 
         </div>
@@ -418,8 +425,8 @@ class MyRecipes extends Component {
 
                 <Row>
                   <Col>
-                    
-                      <img className={style.plusBtn} onClick={this.addIngredientHandler} src={plusSign} style={{ width: "50px", height: "50px" }} />
+
+                    <img className={style.plusBtn} onClick={this.addIngredientHandler} src={plusSign} style={{ width: "50px", height: "50px" }} />
                     <p id="emptyIngArr" style={{ color: "gold", fontSize: "20px", fontWeight: "bold" }}>*Please add at least one ingredient</p>
 
                   </Col>
