@@ -192,8 +192,8 @@ function HomePage(props) {
             <p style={{ marginTop: "0px", textAlign: "center" }}>{`Hey ${userName}, Welcome!`}</p>
             <p style={{ marginTop: "0px", textAlign: "center" }}>Where Do You Want To Go?</p>
             <div className="col-md-12 text-center">
-              <Button href={`http://localhost:3000/myrecipes/${userName}`} variant="link">My Recipes</Button>
-              <Button href="http://localhost:3000/onlinerecipes" variant="link">Online Recipes</Button><br />
+              <Button href={`/myrecipes/${userName}`} variant="link">My Recipes</Button>
+              <Button href="/onlinerecipes" variant="link">Online Recipes</Button><br />
               <Button onClick={closeModalHandler} variant="secondary" style={{ marginTop: '25px' }}>Close</Button>
             </div>
           </div>
