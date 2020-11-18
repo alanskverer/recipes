@@ -44,6 +44,7 @@ h2.onlineSerchBox{
   
   .search-bar{
   width: 40%;
+  min-width: 250px;
   border:1px solid  rgba(98, 98, 98);
   padding: 8px;
   

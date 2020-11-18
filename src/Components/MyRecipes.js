@@ -235,13 +235,15 @@ class MyRecipes extends Component {
         if (response.data !== null) {
 
           let objKeys = Object.keys(response.data);
-
+          let haveOneRecipe = false;
           objKeys.forEach(key => {
 
             let value = response.data[key];
             if (value["userName"] === this.state.userName) {
-
+              haveOneRecipe = true;
               dataArr.push(value);
+              alert("check log ")
+              console.log(value)
               let currentKeyAndName = {
                 key: key,
                 id: value.id
@@ -254,6 +256,18 @@ class MyRecipes extends Component {
             }
 
           });
+          if (!haveOneRecipe) {
+            let exampleRecipe = {
+              id: "Example Pancakes",
+              image: "https://preppykitchen.com/wp-content/uploads/2019/08/Pancakes-recipe-1200.jpg",
+              ingredients: ["suger", "chocolate", "vanilla"],
+              instructions: "Here you will see all the recipe instructions",
+              name: "Example Pancakes",
+              userName: null
+            }
+            dataArr.push(exampleRecipe);
+          }
+
           this.setState({ dataRecipes: dataArr });
         }
 
@@ -353,8 +367,7 @@ class MyRecipes extends Component {
               instructions={recipe.instructions}
               showInstructions={() => this.showInstructionsHandler(recipe.name)}
               img={recipe.image}
-              mod={() => this.eraseHandler(recipe.name)
-              }
+              mod={recipe.name === "Example Pancakes" ? null : () => this.eraseHandler(recipe.name)}
             />
           )
           )}
@@ -369,7 +382,7 @@ class MyRecipes extends Component {
             <Row style={{ padding: "6px" }}>
               <Col sm="4"></Col>
               <Col sm="4" className={style.formCol}>
-                <h4 style={{paddingTop : "0px"}}>{this.state.userName}, Please Add Recipe</h4>
+                <h4 style={{ paddingTop: "0px" }}>{this.state.userName}, Please Add Recipe</h4>
                 <Form.Group >
                   <Row>
                     <Col sm="6"><Form.Label >

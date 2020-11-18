@@ -139,7 +139,7 @@ function HomePage(props) {
 
 
           <Form.Group controlId="formBasicEmail">
-            <Form.Label style={{ color: "white" }}>User Name:</Form.Label>
+            <Form.Label style={{ color: "white" }}>User Name</Form.Label>
             <Form.Control onChange={userNameHandler} className="login-bar" type="text" placeholder="Enter User Name" />
 
           </Form.Group>
