@@ -37,7 +37,6 @@ class MyRecipes extends Component {
     if (localStorage && localStorage.getItem('userName')) {
       userName = JSON.parse(localStorage.getItem('userName'));
     }
-    console.log(userName)
     if (userName === '') {
       $("#menubtn").hide();
       $("#pleaseLogin").show();
@@ -242,8 +241,6 @@ class MyRecipes extends Component {
             if (value["userName"] === this.state.userName) {
               haveOneRecipe = true;
               dataArr.push(value);
-              alert("check log ")
-              console.log(value)
               let currentKeyAndName = {
                 key: key,
                 id: value.id
@@ -305,7 +302,6 @@ class MyRecipes extends Component {
 
   }
   showInstructionsHandler = (recipeName) => {
-    console.log(this.state.dataRecipes)
     let tempArr = [...this.state.dataRecipes]
     for (let i = 0; i < tempArr.length; i++) {
       if (tempArr[i].id === recipeName) {
